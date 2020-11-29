@@ -21,3 +21,32 @@ Now we can simply test if the server is listening on port `2711` via [curl](http
 ```bash
 curl http://localhost:2711/route/entpoint?param="SomeValueWeWantToPass"
 ```
+# Create a Azure Container Registry
+At first we need to create a **Azure Container Registry**.
+Please reference to there page [here](https://docs.microsoft.com/en-us/azure/container-registry/).
+
+For creating the resource group and container registry, I have pesonally used the web portal. Seems simpler to me.
+
+# Link github repo
+Please checkout [here](https://docs.microsoft.com/en-us/azure/container-registry/container-registry-tutorial-build-task)
+
+Now we need to create a task, which listens for commit changes in your public repository. 
+If you have not installed the Azure shell on your pc, just use the web version [here](https://shell.azure.com/)
+
+```bash
+# define some global vars
+ACR_NAME=whati001
+GIT_PAT=<fromGithubToken>
+
+# create a new task
+az acr task create \
+    --registry $ACR_NAME \
+    --name taskacrgolang \
+    --image acrgolang:{{.Run.ID}} \
+    --context https://github.com/whati001/acr-build-echo-golang.git \
+    --file Dockerfile \
+    --git-access-token $GIT_PAT
+
+# trigger by hand for testing
+az acr task run --registry $ACR_NAME --name taskacrgolang
+```
