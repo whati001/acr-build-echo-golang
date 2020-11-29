@@ -52,6 +52,8 @@ az acr task run --registry $ACR_NAME --name taskacrgolang
 ```
 If both jobs finished without an error, you can see the build container image in your registry.
 
+A push to branch `master` will trigger a rebuild of the docker container in acr.
+
 # Create container instance
 Finally we are able to create a container instance from it.
 For this, please follow [this](https://docs.microsoft.com/en-us/azure/container-instances/).
