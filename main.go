@@ -7,7 +7,7 @@ import (
 
 func main() {
 	e := echo.New()
-	e.GET("/route/entpoint", getPage)
+	e.GET("/route/endpoint", getPage)
 	e.Logger.Fatal(e.Start(":2711"))
 }
 

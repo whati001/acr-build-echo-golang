@@ -50,3 +50,11 @@ az acr task create \
 # trigger by hand for testing
 az acr task run --registry $ACR_NAME --name taskacrgolang
 ```
+If both jobs finished without an error, you can see the build container image in your registry.
+
+# Create container instance
+Finally we are able to create a container instance from it.
+For this, please follow [this](https://docs.microsoft.com/en-us/azure/container-instances/).
+
+Please ensure to create an instance from your created container.
+You need to enable **admin** stuff in your registry and make port `2711` public.
